@@ -11,7 +11,7 @@ session = Session()
 faker = Faker()
 
 # Define user data
-#use faker next
+# use faker if have time
 users_data = [
     {"username": "user1", "email": "user1@example.com"},
     {"username": "user2", "email": "user2@example.com"},
@@ -105,7 +105,7 @@ comics_data = [
         ],
     },
 ]
-
+# added other publishers for comparison if time allowed
 # Create and add comics with associated issues to the session
 for comic_info in comics_data:
     comic = Comic(title=comic_info["title"], publisher=comic_info["publisher"])
