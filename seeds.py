@@ -1,13 +1,14 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import User, Comic, ComicIssue
-
+from faker import Faker
 # Create a database connection
 engine = create_engine("sqlite:///data.db")
 
 # Create a Session
 Session = sessionmaker(bind=engine)
 session = Session()
+faker = Faker()
 
 # Define user data
 #use faker next
