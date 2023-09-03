@@ -16,9 +16,9 @@ class User(Base):
 
     # Define unique constraints, out of time
     # Example: UniqueConstraint('username', 'email', name='unique_username_email')
-    #didn't work for me, too many errors, missing something
+    #Didn't work for me, too many errors, missing something
 
-class Comic(Base):
+class Comic(Base):    #Create Comic table
     __tablename__ = "comic"
 
     id = Column(Integer, primary_key=True)
