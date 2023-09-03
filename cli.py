@@ -7,7 +7,7 @@ from models import User, Comic  # Import SQLAlchemy User and Comic models
 # Define the database connection
 DATABASE_URL = "sqlite:///data.db"
 
-# ASCII banner
+# ASCII banner from https://patorjk.com/software/taag/#p=display&f=Ogre&t=Comic%20Collector great ascii avail
 BANNER = """
    ___                _          ___      _ _           _             
   / __\___  _ __ ___ (_) ___    / __\___ | | | ___  ___| |_ ___  _ __ 
