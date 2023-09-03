@@ -37,3 +37,4 @@ Use a list to show the relationships between users and comics
 
 
 Collection of Comics can be a varied and complicated hobby. In order to simply which issues one currently owns, this cli is perfect for that.
+Not only are there many issues, but there are many different titles.
