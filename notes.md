@@ -11,3 +11,7 @@
     # c. ipdb as a debugger
 
     # d. faker-generate fake data
+
+# 4. create the migration environment
+
+pipenv install && pipenv shell
