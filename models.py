@@ -39,5 +39,5 @@ class ComicIssue(Base):
     issue_number = Column(Integer)
     comic_id = Column(Integer, ForeignKey("comic.id"))
 
-    # Establish a back-reference to the Comic table
+    # Establish a back-reference to the Comic table/ used instead of back_ref
     comic = relationship("Comic", back_populates="issues")
