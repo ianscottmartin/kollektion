@@ -139,7 +139,7 @@ def add_user():
         print(f"User {username} with email {email} added successfully.")
 
         # Add a back option
-        back_option = input("Enter 'B' to go back to the previous menu or press Enter to continue: ").strip().lower()
+        back_option = input("Enter 'b' to go back to the previous menu or press Enter to continue: ").strip().lower()
         if back_option == "b":
             break
 
@@ -148,7 +148,7 @@ def add_user():
 def add_comic():
     while True:
         # Get user inputs for comic title and publisher
-        title = input("Enter comic title (or 'B' to go back): ")
+        title = input("Enter comic title (or 'b' to go back): ")
         
         if title.strip().lower() == 'b':
             break
