@@ -29,3 +29,6 @@ pipenv install && pipenv shell
 # 9. populate the database with seeds
 
 check seeds with sqlaexplorer
+
+# 10. test the environment relationships one to many(work on many to many as well)
+
