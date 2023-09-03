@@ -17,8 +17,10 @@ This is a new attempt at the project for Phase 3
     #4. open cli.py in terminal to begin
     #5. Interact with menu: add, see lists etc
 
+
+    # Blog link for this type of cli
     
-     
+
 
 
 
