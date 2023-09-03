@@ -25,3 +25,7 @@ pipenv install && pipenv shell
 # 7. create declarative environment
 
 # 8 create schema python classes or models(flush put all ideas)
+
+# 9. populate the database with seeds
+
+check seeds with sqlaexplorer
