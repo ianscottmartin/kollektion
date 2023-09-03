@@ -52,7 +52,7 @@ comics_data = [
             {"issue_number": 101},
             {"issue_number": 102},
         ],
-        "user_id": 2,  # Assign this comic to user with ID 2
+        "user_id": 2,  
     },
     {
         "title": "Black Panther",
@@ -61,7 +61,7 @@ comics_data = [
             {"issue_number": 1},
             {"issue_number": 2},
         ],
-        "user_id": 3,  # Assign this comic to user with ID 3
+        "user_id": 3,  
     },
     {
         "title": "Ironman",
@@ -105,7 +105,7 @@ comics_data = [
         ],
     },
 ]
-# added other publishers for comparison if time allowed
+# Added other publishers for comparison if time allowed
 # Create and add comics with associated issues to the session
 for comic_info in comics_data:
     comic = Comic(title=comic_info["title"], publisher=comic_info["publisher"])
