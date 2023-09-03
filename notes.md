@@ -33,3 +33,13 @@ check seeds with sqlaexplorer
 # 10. test the environment relationships one to many(work on many to many as well)
 
 # 11 Deliverables
+
+Aggregate methods to project
+-CRUD
+-Create- create list(join table)
+-Read
+-display all comics
+-display liked comics
+
+    -Update-
+    -Delete remove from list of liked
