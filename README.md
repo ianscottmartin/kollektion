@@ -20,7 +20,12 @@ This is a new attempt at the project for Phase 3
 
     # Blog link for this type of cli
     https://medium.com/@ianscottmartin/setting-up-a-database-using-sqlalchemy-59856f77cd78
+
+
+    # User Story
+
     
+
 
 
 
