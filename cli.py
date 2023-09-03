@@ -192,7 +192,6 @@ def get_user_by_id(user_id):
     except ValueError:
         return None
 
-# ... (remaining code) ...
 # Add a new command to the CLI for adding an issue to a user
 @cli.command()
 def add_issue():
@@ -201,6 +200,7 @@ def add_issue():
 
 
 # Run the CLI
+#Validate each function
 if __name__ == "__main__":
     while True:
         choice = welcome_menu()
