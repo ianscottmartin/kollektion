@@ -1,5 +1,7 @@
 # Catalogue comic books by publisher and user
 
+#CLI is a command line interface program
+
 # 1. create virtual environment- had to delete pipfile and pipfile.lock in main directory
 
 # 2. install dependencies
