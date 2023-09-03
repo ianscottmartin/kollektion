@@ -9,13 +9,14 @@ class User(Base):
 
     id = Column(Integer, primary_key=True)
     username = Column(String(55), unique=True)
-    email = Column(String(100), unique=True)  # Adjust the length as needed
+    email = Column(String(100), unique=True)  # Adjust the length as needed, not that need so many characters
 
     # Define a one-to-many relationship between User and Comic
     comics = relationship("Comic", back_populates="user")
 
-    # Define unique constraints, if needed
+    # Define unique constraints, out of time
     # Example: UniqueConstraint('username', 'email', name='unique_username_email')
+    #didn't work for me, too many errors, missing something
 
 class Comic(Base):
     __tablename__ = "comic"
