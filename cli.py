@@ -2,26 +2,26 @@
 import click
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import User, Comic  # Import your SQLAlchemy User and Comic models
+from models import User, Comic  # Import SQLAlchemy User and Comic models
 
 # Define the database connection
 DATABASE_URL = "sqlite:///data.db"
 
 # ASCII banner
 BANNER = """
-  ____ _ _       ____                      _       
- / ___(_) |_    / ___|___  _ __ ___  _ __ (_) __ _ 
-| |   | | __|  | |   / _ \| '_ ` _ \| '_ \| |/ _` |
-| |___| | |_   | |__| (_) | | | | | | |_) | | (_| |
- \____|_|\__|   \____\___/|_| |_| |_| .__/|_|\__,_|
-                                   |_|            
+   ___                _          ___      _ _           _             
+  / __\___  _ __ ___ (_) ___    / __\___ | | | ___  ___| |_ ___  _ __ 
+ / /  / _ \| '_ ` _ \| |/ __|  / /  / _ \| | |/ _ \/ __| __/ _ \| '__|
+/ /__| (_) | | | | | | | (__  / /__| (_) | | |  __/ (__| || (_) | |   
+\____/\___/|_| |_| |_|_|\___| \____/\___/|_|_|\___|\___|\__\___/|_|   
+                                                                      
 """
 
 # Function to display the welcome menu
 def welcome_menu():
     click.clear()  # Clear the console
     click.echo(BANNER)
-    click.echo("Welcome to Your CLI Application!")
+    click.echo("Welcome to Comic Collector!")
     click.echo("1. User Management")
     click.echo("2. Comic Management")
     click.echo("3. Quit")
@@ -29,7 +29,7 @@ def welcome_menu():
     choice = input("Enter your choice (1/2/3): ")
     return choice
 
-# Function to display the user management menu
+# Function to display the user menu
 def user_management_menu():
     while True:
         click.clear()  # Clear the console
@@ -41,13 +41,15 @@ def user_management_menu():
         choice = input("Enter your choice (1/2/3): ")
 
         if choice == "1":
-            list_users()
+            list_users()  # Call the list_users function
+
         elif choice == "2":
-            add_user()
+            add_user()  # Call the add_user function
+
         elif choice == "3":
             break
 
-# Function to display the comic management menu
+# Function to display the comic menu
 def comic_management_menu():
     while True:
         click.clear()  # Clear the console
@@ -59,11 +61,17 @@ def comic_management_menu():
         choice = input("Enter your choice (1/2/3): ")
 
         if choice == "1":
-            list_comics()
+            list_comics()  # Call the list_comics function
+
         elif choice == "2":
-            add_comic()
+            add_comic()  # Call the add_comic function
+
         elif choice == "3":
             break
+
+# Function to display a message and wait for user input to continue
+def press_enter_to_continue(message="Press Enter to continue..."):
+    input(message)
 
 # Function to list users
 def list_users():
@@ -72,6 +80,7 @@ def list_users():
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    # Query the User table and fetch all users
     users = session.query(User).all()
 
     if not users:
@@ -80,6 +89,7 @@ def list_users():
         click.echo("List of users:")
         for user in users:
             click.echo(f"Username: {user.username}, Email: {user.email}")
+        press_enter_to_continue("Press Enter to go back...")
 
 # Function to list comics
 def list_comics():
@@ -88,6 +98,7 @@ def list_comics():
     Session = sessionmaker(bind=engine)
     session = Session()
 
+    # Query the Comic table and fetch all comics
     comics = session.query(Comic).all()
 
     if not comics:
@@ -96,6 +107,7 @@ def list_comics():
         click.echo("List of comics:")
         for comic in comics:
             click.echo(f"Title: {comic.title}, Publisher: {comic.publisher}")
+        press_enter_to_continue("Press Enter to go back...")
 
 # Main CLI function
 @click.group()
@@ -120,13 +132,14 @@ def add_user():
     session.commit()
 
     print(f"User {username} with email {email} added successfully.")
+    press_enter_to_continue("Press Enter to go back...")
 
-# Define the add-comic command (with 'Publisher' instead of 'Author')
+# Define the add-comic command
 @cli.command()
 def add_comic():
     # Get user inputs for comic title and publisher
     title = input("Enter comic title: ")
-    publisher = input("Enter comic publisher: ")  # Changed 'author' to 'publisher'
+    publisher = input("Enter comic publisher: ") 
 
     # Initialize SQLAlchemy session
     engine = create_engine(DATABASE_URL)
@@ -134,11 +147,58 @@ def add_comic():
     session = Session()
 
     # Create a new Comic object and add it to the database
-    comic = Comic(title=title, publisher=publisher)  # Changed 'author' to 'publisher'
+    comic = Comic(title=title, publisher=publisher)  
     session.add(comic)
     session.commit()
 
     print(f"Comic '{title}' by {publisher} added successfully.")
+    press_enter_to_continue("Press Enter to go back...")
+
+
+# Function to add an issue for a specific user
+def add_issue_user():
+    while True:
+        click.clear()  # Clear the console
+        click.echo("Add Issue for User")
+        
+        # Get user ID and validate it
+        user_id = input("Enter User ID (or '0' to cancel): ")
+        if user_id == '0':
+            break
+
+        user = get_user_by_id(user_id)
+        if user is None:
+            click.echo("User not found. Please enter a valid User ID.")
+            continue
+
+        # Get issue details
+        title = input("Enter Issue Title: ")
+        description = input("Enter Issue Description: ")
+
+        # Create a new Issue object and add it to the database
+        issue = ComicIssue(title=title, description=description, user=user)
+        session.add(issue)
+        session.commit()
+
+        print(f"ComicIssue '{title}' added successfully for User '{user.username}'.")
+        click.pause()
+
+# Function to get a user by ID
+def get_user_by_id(user_id):
+    try:
+        user_id = int(user_id)
+        user = session.query(User).filter_by(id=user_id).first()
+        return user
+    except ValueError:
+        return None
+
+# ... (remaining code) ...
+# Add a new command to the CLI for adding an issue to a user
+@cli.command()
+def add_issue():
+    add_issue_user()
+
+
 
 # Run the CLI
 if __name__ == "__main__":
@@ -151,4 +211,6 @@ if __name__ == "__main__":
             comic_management_menu()
         elif choice == "3":
             break
+
+
 
