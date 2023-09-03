@@ -29,8 +29,8 @@ This is a new attempt at the project for Phase 3
 Type of relationship: one ot many user may have one or many to comics
 comics can have a relationship of many to many between users
 -relationships
--user_comic_liked
 -user can many fav comics
 Comic can be liked by many users
 user to comics = many to many relationship
-How ot use lists and dictionaries Use a list to show the relationships between users and comics
+How to use lists and dictionaries
+Use a list to show the relationships between users and comics
