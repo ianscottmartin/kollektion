@@ -16,6 +16,13 @@ users_data = [
     {"username": "user1", "email": "user1@example.com"},
     {"username": "user2", "email": "user2@example.com"},
     {"username": "user3", "email": "user3@example.com"},
+    
+    {"username": "user4", "email": "user4@example.com"},
+    {"username": "user5", "email": "user5@example.com"},
+    
+    {"username": "user6", "email": "user12@example.com"},
+    {"username": "user7", "email": "user11@example.com"},
+    {"username": "user8", "email": "user10@example.com"},
 ]
 
 # Create and add users to the session
