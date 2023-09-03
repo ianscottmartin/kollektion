@@ -21,3 +21,5 @@
 # 6. configure the migration environment (alembic.ini and env.py) finished
 
 pipenv install && pipenv shell
+
+# 7. create declarative environment
