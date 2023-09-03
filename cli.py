@@ -7,7 +7,7 @@ from models import User, Comic  # Import SQLAlchemy User and Comic models
 # Define the database connection
 DATABASE_URL = "sqlite:///data.db"
 
-# ASCII banner from https://patorjk.com/software/taag/#p=display&f=Ogre&t=Comic%20Collector great ascii avail
+# ASCII banner from https://patorjk.com/software/taag/#p=display&f=Ogre&t=Comic%20Collector
 BANNER = """
    ___                _          ___      _ _           _             
   / __\___  _ __ ___ (_) ___    / __\___ | | | ___  ___| |_ ___  _ __ 
@@ -117,90 +117,62 @@ def cli():
 # Define the add-user command
 @cli.command()
 def add_user():
-    # Get user inputs for username and email
-    username = input("Enter username: ")
-    email = input("Enter email: ")
+    while True:
+        # Get user inputs for username and email
+        username = input("Enter username (or 'B' to go back): ")
+        
+        if username.strip().lower() == 'b':
+            break
+        
+        email = input("Enter email: ")
 
-    # Initialize SQLAlchemy engine and session
-    engine = create_engine(DATABASE_URL)
-    Session = sessionmaker(bind=engine)
-    session = Session()
+        # Initialize SQLAlchemy engine and session
+        engine = create_engine(DATABASE_URL)
+        Session = sessionmaker(bind=engine)
+        session = Session()
 
-    # Create a new User object and add it to the database
-    user = User(username=username, email=email)
-    session.add(user)
-    session.commit()
+        # Create a new User object and add it to the database
+        user = User(username=username, email=email)
+        session.add(user)
+        session.commit()
 
-    print(f"User {username} with email {email} added successfully.")
-    press_enter_to_continue("Press Enter to go back...")
+        print(f"User {username} with email {email} added successfully.")
+
+        # Add a back option
+        back_option = input("Enter 'B' to go back to the previous menu or press Enter to continue: ").strip().lower()
+        if back_option == "b":
+            break
 
 # Define the add-comic command
 @cli.command()
 def add_comic():
-    # Get user inputs for comic title and publisher
-    title = input("Enter comic title: ")
-    publisher = input("Enter comic publisher: ") 
-
-    # Initialize SQLAlchemy session
-    engine = create_engine(DATABASE_URL)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-
-    # Create a new Comic object and add it to the database
-    comic = Comic(title=title, publisher=publisher)  
-    session.add(comic)
-    session.commit()
-
-    print(f"Comic '{title}' by {publisher} added successfully.")
-    press_enter_to_continue("Press Enter to go back...")
-
-
-# Function to add an issue for a specific user
-def add_issue_user():
     while True:
-        click.clear()  # Clear the console
-        click.echo("Add Issue for User")
+        # Get user inputs for comic title and publisher
+        title = input("Enter comic title (or 'B' to go back): ")
         
-        # Get user ID and validate it
-        user_id = input("Enter User ID (or '0' to cancel): ")
-        if user_id == '0':
+        if title.strip().lower() == 'b':
             break
+        
+        publisher = input("Enter comic publisher: ") 
 
-        user = get_user_by_id(user_id)
-        if user is None:
-            click.echo("User not found. Please enter a valid User ID.")
-            continue
+        # Initialize SQLAlchemy session
+        engine = create_engine(DATABASE_URL)
+        Session = sessionmaker(bind=engine)
+        session = Session()
 
-        # Get issue details
-        title = input("Enter Issue Title: ")
-        description = input("Enter Issue Description: ")
-
-        # Create a new Issue object and add it to the database
-        issue = ComicIssue(title=title, description=description, user=user)
-        session.add(issue)
+        # Create a new Comic object and add it to the database
+        comic = Comic(title=title, publisher=publisher)  
+        session.add(comic)
         session.commit()
 
-        print(f"ComicIssue '{title}' added successfully for User '{user.username}'.")
-        click.pause()
+        print(f"Comic '{title}' by {publisher} added successfully.")
 
-# Function to get a user by ID
-def get_user_by_id(user_id):
-    try:
-        user_id = int(user_id)
-        user = session.query(User).filter_by(id=user_id).first()
-        return user
-    except ValueError:
-        return None
-
-# Add a new command to the CLI for adding an issue to a user
-@cli.command()
-def add_issue():
-    add_issue_user()
-
-
+        # Add a back option
+        back_option = input("Enter 'B' to go back to the previous menu or press Enter to continue: ").strip().lower()
+        if back_option == "b":
+            break
 
 # Run the CLI
-#Validate each function
 if __name__ == "__main__":
     while True:
         choice = welcome_menu()
@@ -211,6 +183,4 @@ if __name__ == "__main__":
             comic_management_menu()
         elif choice == "3":
             break
-
-
 
