@@ -18,6 +18,6 @@
 
     start with initial alembic migration
 
-# 6.
+# 6. configure the migration environment (alembic.ini and env.py) finished
 
-    pipenv install && pipenv shell
+pipenv install && pipenv shell
