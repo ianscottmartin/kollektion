@@ -14,4 +14,8 @@
 
 # 4. create the migration environment
 
-pipenv install && pipenv shell
+# pipenv install && pipenv shell
+
+# alembic init migrations 
+start with initial alembic migration
+
