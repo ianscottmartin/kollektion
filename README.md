@@ -34,5 +34,3 @@ Comic can be liked by many users
 user to comics = many to many relationship
 How to use lists and dictionaries
 Use a list to show the relationships between users and comics
-
-

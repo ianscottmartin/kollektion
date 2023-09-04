@@ -27,7 +27,7 @@ class Comic(Base):    #Create Comic table
 
     # Define a many-to-one relationship between Comic and User
     user_id = Column(Integer, ForeignKey("user.id"))
-    user = relationship("User", back_populates="comics")
+    user = relationship("User", back_populates="comics") #back_ref not functioning
 
     # Create a one-to-many relationship with ComicIssue
     issues = relationship("ComicIssue", back_populates="comic")

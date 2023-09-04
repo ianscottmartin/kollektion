@@ -2,7 +2,7 @@
 import click
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import User, Comic  # Import SQLAlchemy User and Comic models
+from models import User, Comic  # Import SQLAlchemy User and Comic models and dependencies
 
 # Define the database connection
 DATABASE_URL = "sqlite:///data.db"
@@ -121,7 +121,7 @@ def add_user():
         # Get user inputs for username and email
         username = input("Enter username (or 'B' to go back): ")
         
-        if username.strip().lower() == 'b':
+        if username.strip().lower() == 'B':
             break
         
         email = input("Enter email: ")
@@ -140,7 +140,7 @@ def add_user():
 
         # Add a back option
         back_option = input("Enter 'B' to go back to the previous menu or press Enter to continue: ").strip().lower()
-        if back_option == "b":
+        if back_option == "B":
             break
 
 # Define the add-comic command
@@ -150,7 +150,7 @@ def add_comic():
         # Get user inputs for comic title and publisher
         title = input("Enter comic title (or 'B' to go back): ")
         
-        if title.strip().lower() == 'b':
+        if title.strip().lower() == 'B':
             break
         
         publisher = input("Enter comic publisher: ") 
@@ -169,7 +169,7 @@ def add_comic():
 
         # Add a back option
         back_option = input("Enter 'B' to go back to the previous menu or press Enter to continue: ").strip().lower()
-        if back_option == "b":
+        if back_option == "B":
             break
 
 # Run the CLI

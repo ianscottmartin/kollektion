@@ -42,7 +42,7 @@ comics_data = [
             {"issue_number": 2},
             {"issue_number": 3},
         ],
-        "user_id": 1,  # Assign this comic to user with ID 1
+        "user_id": 1, 
     },                 # Assign the comic to the user with ID's
     {
         "title": "X-Men",
@@ -128,4 +128,5 @@ for comic_info in comics_data:
 session.commit()
 
 # Close the session
+#Add more relationship if time allows
 session.close()
