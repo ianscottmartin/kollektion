@@ -35,5 +35,4 @@ user to comics = many to many relationship
 How to use lists and dictionaries
 Use a list to show the relationships between users and comics
 
-Collection of Comics can be a varied and complicated hobby. In order to simply which issues one currently owns, this cli is perfect for that.
-Not only are there many issues, but there are many different titles. Depending on your collection, you may have many Titles and many different publishers. With this app you can catalog issues, titles along with publisher.
+
