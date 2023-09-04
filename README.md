@@ -21,8 +21,7 @@ This is a new attempt at the project for Phase 3
     # Blog link for this type of cli
     https://medium.com/@ianscottmartin/setting-up-a-database-using-sqlalchemy-59856f77cd78
 
-
-    # User Story
+# User Story
 
 # Collection of Comics can be a varied and complicated hobby. In order to simply which issues one currently owns, this cli is perfect for that. Not only are there many issues, but there are many different titles. Depending on your collection, you may have many Titles and many different publishers. With this app you can catalog issues, titles along with publisher.
 
