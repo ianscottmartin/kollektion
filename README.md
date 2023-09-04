@@ -1,7 +1,6 @@
 # kollektion
 
-issues kollektion
-This is a new attempt at the project for Phase 3
+# This is a new attempt at the project for Phase 3
 
 # Welcome to Comic Collector
 
@@ -25,7 +24,9 @@ This is a new attempt at the project for Phase 3
 
 # Collection of Comics can be a varied and complicated hobby. In order to simply which issues one currently owns, this cli is perfect for that. Not only are there many issues, but there are many different titles. Depending on your collection, you may have many Titles and many different publishers. With this app you can catalog issues, titles along with publisher.
 
-Type of relationship: one ot many user may have one or many to comics
+# Type of relationship:
+
+one to many user may have one or many to comics
 comics can have a relationship of many to many between users
 -relationships
 -user can many fav comics
