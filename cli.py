@@ -1,34 +1,22 @@
-
-#!/usr/bin/env python
 import click
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from models import User, Comic  # Import SQLAlchemy User and Comic models and dependencies
+from models import User, Comic
 
 # Define the database connection
 DATABASE_URL = "sqlite:///data.db"
 
-# ASCII banner from https://patorjk.com/software/taag/#p=display&f=Ogre&t=Comic%20Collector
-BANNER = """
-   ___                _          ___      _ _           _             
-  / __\___  _ __ ___ (_) ___    / __\___ | | | ___  ___| |_ ___  _ __ 
- / /  / _ \| '_ ` _ \| |/ __|  / /  / _ \| | |/ _ \/ __| __/ _ \| '__|
-/ /__| (_) | | | | | | | (__  / /__| (_) | | |  __/ (__| || (_) | |   
-\____/\___/|_| |_| |_|_|\___| \____/\___/|_|_|\___|\___|\__\___/|_|   
-                                                                      
-"""
+# Initialize SQLAlchemy engine and session
+engine = create_engine(DATABASE_URL)
+Session = sessionmaker(bind=engine)
 
 # Function to display the welcome menu
 def welcome_menu():
     click.clear()  # Clear the console
-    click.echo(BANNER)
     click.echo("Welcome to Comic Collector!")
     click.echo("1. User Management")
     click.echo("2. Comic Management")
     click.echo("3. Quit")
-
-    choice = input("Enter your choice (1/2/3): ")
-    return choice
 
 # Function to display the user menu
 def user_management_menu():
@@ -42,11 +30,9 @@ def user_management_menu():
         choice = input("Enter your choice (1/2/3): ")
 
         if choice == "1":
-            list_users()  # Call the list_users function
-
+            list_users()
         elif choice == "2":
-            add_user()  # Call the add_user function
-
+            add_user()
         elif choice == "3":
             break
 
@@ -62,17 +48,11 @@ def comic_management_menu():
         choice = input("Enter your choice (1/2/3): ")
 
         if choice == "1":
-            list_comics()  # Call the list_comics function
-
+            list_comics()
         elif choice == "2":
-            add_comic()  # Call the add_comic function
-
+            add_comic()
         elif choice == "3":
             break
-
-# Function to display a message and wait for user input to continue
-def press_enter_to_continue(message="Press Enter to continue..."):
-    input(message)
 
 # Function to list users
 def list_users():
@@ -90,7 +70,8 @@ def list_users():
         click.echo("List of users:")
         for user in users:
             click.echo(f"Username: {user.username}, Email: {user.email}")
-        press_enter_to_continue("Press Enter to go back...")
+
+    press_enter_to_continue(user_management_menu)
 
 # Function to list comics
 def list_comics():
@@ -108,7 +89,14 @@ def list_comics():
         click.echo("List of comics:")
         for comic in comics:
             click.echo(f"Title: {comic.title}, Publisher: {comic.publisher}")
-        press_enter_to_continue("Press Enter to go back...")
+
+    press_enter_to_continue(comic_management_menu)
+
+# Function to display a message and wait for user input to continue
+def press_enter_to_continue(next_menu_func=None):
+    input("Press Enter to continue...")
+    if next_menu_func:
+        next_menu_func()  # Call the specified menu function
 
 # Main CLI function
 @click.group()
@@ -118,65 +106,49 @@ def cli():
 # Define the add-user command
 @cli.command()
 def add_user():
-    while True:
-        # Get user inputs for username and email
-        username = input("Enter username (or 'B' to go back): ")
-        
-        if username.strip().lower() == 'B':
-            break
-        
-        email = input("Enter email: ")
+    # Get user inputs for username and email
+    username = input("Enter username: ")
+    email = input("Enter email: ")
 
-        # Initialize SQLAlchemy engine and session
-        engine = create_engine(DATABASE_URL)
-        Session = sessionmaker(bind=engine)
-        session = Session()
+    # Initialize SQLAlchemy engine and session
+    engine = create_engine(DATABASE_URL)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-        # Create a new User object and add it to the database
-        user = User(username=username, email=email)
-        session.add(user)
-        session.commit()
+    # Create a new User object and add it to the database
+    user = User(username=username, email=email)
+    session.add(user)
+    session.commit()
 
-        print(f"User {username} with email {email} added successfully.")
-
-        # Add a back option
-        back_option = input("Enter 'B' to go back to the previous menu or press Enter to continue: ").strip().lower()
-        if back_option == "B":
-            break
+    print(f"User {username} with email {email} added successfully.")
+    press_enter_to_continue(user_management_menu)
 
 # Define the add-comic command
 @cli.command()
 def add_comic():
-    while True:
-        # Get user inputs for comic title and publisher
-        title = input("Enter comic title (or 'B' to go back): ")
-        
-        if title.strip().lower() == 'B':
-            break
-        
-        publisher = input("Enter comic publisher: ") 
+    # Get user inputs for comic title and publisher
+    title = input("Enter comic title: ")
+    publisher = input("Enter comic publisher: ")
 
-        # Initialize SQLAlchemy session
-        engine = create_engine(DATABASE_URL)
-        Session = sessionmaker(bind=engine)
-        session = Session()
+    # Initialize SQLAlchemy session
+    engine = create_engine(DATABASE_URL)
+    Session = sessionmaker(bind=engine)
+    session = Session()
 
-        # Create a new Comic object and add it to the database
-        comic = Comic(title=title, publisher=publisher)  
-        session.add(comic)
-        session.commit()
+    # Create a new Comic object and add it to the database
+    comic = Comic(title=title, publisher=publisher)
+    session.add(comic)
+    session.commit()
 
-        print(f"Comic '{title}' by {publisher} added successfully.")
-
-        # Add a back option
-        back_option = input("Enter 'B' to go back to the previous menu or press Enter to continue: ").strip().lower()
-        if back_option == "B":
-            break
+    print(f"Comic '{title}' by {publisher} added successfully.")
+    press_enter_to_continue(comic_management_menu)
 
 # Run the CLI
 if __name__ == "__main__":
     while True:
-        choice = welcome_menu()
+        welcome_menu()
+
+        choice = input("Enter your choice (1/2/3): ")
 
         if choice == "1":
             user_management_menu()
